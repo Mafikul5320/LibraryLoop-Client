@@ -4,7 +4,7 @@ import { NavLink } from 'react-router';
 
 const Navber = () => {
     return (
-        <div className='bg-white/10 backdrop-blur-md shadow-xl py-3'>
+        <div className='bg-white/90 backdrop-blur-md shadow-xl py-3 fixed top-0 left-0 z-50 w-full'>
             <div className='w-10/13 mx-auto flex justify-between items-center'>
                 {/*left site  */}
                 <div className='flex items-center'>

@@ -88,7 +88,7 @@ const Footer = () => {
             </div>
             <div className="footer  sm:footer-horizontal footer-center bg-[#1e2836] text-gray-300 p-4">
                 <aside>
-                    <p>Copyright © {new Date().getFullYear()} - All right reserved by ACME Industries Ltd</p>
+                    <p>Copyright © {new Date().getFullYear()} - All right reserved by LibraryLoop</p>
                 </aside>
             </div>
         </footer>
