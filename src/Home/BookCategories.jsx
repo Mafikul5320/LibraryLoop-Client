@@ -1,5 +1,6 @@
 import { BookOpen, MoveRight } from 'lucide-react';
 import React from 'react';
+import { Link } from 'react-router';
 
 const BookCategories = () => {
     return (
@@ -13,6 +14,7 @@ const BookCategories = () => {
                 </p>
                 <div className='grid grid-cols-4 gap-7 mt-9'>
 
+                    <Link to={'/categories/Book'}>
                     <div>
                         <div className='bg-blue-500 h-37 rounded-t-2xl relative'>
                             <div className='absolute right-4 top-4 border-2 border-white/40 rounded-full w-8 h-8' />
@@ -36,6 +38,7 @@ const BookCategories = () => {
                             <p className='flex items-center text-blue-600 font-semibold'>Explore Collection <span className='pl-2'><MoveRight className='pt-1' /></span></p>
                         </div>
                     </div>
+                    </Link>
                     <div>
                         <div className='bg-red-500 h-37 rounded-t-2xl relative'>
                             <div className='absolute right-4 top-4 border-2 border-white/40 rounded-full w-8 h-8' />
