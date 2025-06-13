@@ -15,11 +15,11 @@ const Navber = () => {
                 <div className='flex items-center space-x-3'>
                     <button className='text-base font-semibold  text-gray-500'><NavLink to={'/'} className={({ isActive }) => isActive && "text-blue-600 border-b-2 pb-1"}>Home</NavLink></button>
 
-                    <button className=' font-semibold text-gray-700'><NavLink to={'/'} className={({ isActive }) => isActive && "text-blue-600 border-b-2 pb-1"}>All Books</NavLink></button>
+                    <button className=' font-semibold text-gray-700'><NavLink to={"/all-Book"} className={({ isActive }) => isActive && "text-blue-600 border-b-2 pb-1"}>All Books</NavLink></button>
 
-                    <button className='text-base font-semibold text-gray-500'><NavLink to={'/'} className={({ isActive }) => isActive && "text-blue-600 border-b-2 pb-1"}>Add Book</NavLink></button>
+                    <button className='text-base font-semibold text-gray-500'><NavLink to={"/add-book"} className={({ isActive }) => isActive && "text-blue-600 border-b-3 pb-1"}>Add Book</NavLink></button>
                     
-                    <button className='text-base font-semibold text-gray-500'><NavLink to={'/'} className={({ isActive }) => isActive && "text-blue-600 border-b-2 pb-1"}>Borrowed Books</NavLink></button>
+                    <button className='text-base font-semibold text-gray-500'><NavLink to={"/Borrowed-Books"} className={({ isActive }) => isActive && "text-blue-600 border-b-2 pb-1"}>Borrowed Books</NavLink></button>
                 </div>
                 {/* Right site */}
                 <div className='flex items-center space-x-4'>

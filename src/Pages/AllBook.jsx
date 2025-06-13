@@ -1,10 +1,9 @@
-import { Eye, Package, SquarePen, Tag, User } from 'lucide-react';
 import React from 'react';
+import { Eye, Package, SquarePen, Tag, User } from 'lucide-react';
 import { Link } from 'react-router';
-
-const CategoryBookPage = () => {
+const AllBook = () => {
     return (
-        <div>
+           <div>
             <h1 className='py-8 text-4xl font-bold text-center'>All Books</h1>
             <div className='grid grid-cols-4 gap-6 w-10/13 mx-auto'>
                 <div className='  rounded-b-xl shadow-lg'>
@@ -36,9 +35,14 @@ const CategoryBookPage = () => {
                             </div>
                             <span className='pl-2'>(4.8)</span>
                         </div>
-                        <div className=' justify-center py-3 px-3'>
-                            <Link to={'/view-details'} className='btn py-6 bg-gradient-to-r from-blue-600 to-teal-600 text-white rounded-lg font-semibold text-base w-full '><Eye size={17} />
+                        <div className='flex items-center space-x-2 justify-center py-3 px-3'>
+                            <Link to={'/view-details'} className='btn py-6 bg-gradient-to-r from-blue-600 to-teal-600 text-white rounded-lg font-semibold text-base w-[83%] '><Eye size={17} />
                                 View Details
+                            </Link>
+                            <Link to={"/add-book"}
+                                className=" px-4 py-3 border-2 border-gray-500 text-gray-600 font-semibold rounded-lg hover:bg-gray-200 transition-all duration-200"
+                            >
+                                <SquarePen size={18} />
                             </Link>
                         </div>
                     </div>
@@ -48,4 +52,4 @@ const CategoryBookPage = () => {
     );
 };
 
-export default CategoryBookPage;
+export default AllBook;
