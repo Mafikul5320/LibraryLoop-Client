@@ -1,8 +1,28 @@
 import React from 'react';
 import logo from '../assets/logo.jpg'
 import { Save } from 'lucide-react';
+import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const AddBook = () => {
+    const Handelsubmit = (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const formData = new FormData(form);
+        const bookData = Object.fromEntries(formData.entries());
+        console.log(bookData)
+        axios.post('http://localhost:3000/books', bookData).then(res => {
+            console.log(res.data)
+            if (res.data.insertedId) {
+                Swal.fire({
+                    icon: "success",
+                    title: "Your Book Add Successfull!",
+                    showConfirmButton: false,
+                    timer: 1600
+                });
+            }
+        })
+    }
     return (
         <div className='w-10/13 mx-auto my-9'>
             <div className='flex justify-center items-center'>
@@ -11,7 +31,7 @@ const AddBook = () => {
             </div>
             <h1 className='text-gray-500 text-xl text-center py-4'>Expand our library collection by adding a new book with detailed <br /> information</h1>
             <div className='bg-white p-5 shadow-lg my-4'>
-                <form className="space-y-8">
+                <form onSubmit={Handelsubmit} className="space-y-8">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                         {/* Left Column */}
                         <div className="space-y-6">
@@ -22,6 +42,7 @@ const AddBook = () => {
                                 </label>
                                 <input
                                     type="text"
+                                    name='bookname'
                                     required
                                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                                     placeholder="Enter book title"
@@ -36,6 +57,7 @@ const AddBook = () => {
                                 <input
                                     type="text"
                                     required
+                                    name='authorname'
                                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                                     placeholder="Enter author name"
                                 />
@@ -48,6 +70,7 @@ const AddBook = () => {
                                 </label>
                                 <select
                                     required
+                                    name='category'
                                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                                 >
                                     <option value="">Select a category</option>
@@ -55,8 +78,8 @@ const AddBook = () => {
                                     <option value="Thriller">Thriller</option>
                                     <option value="History">History</option>
                                     <option value="Drama">Drama</option>
-                                    <option value="Sci-Fi">Sci-Fi</option>
-                                    <option value="Biography">Biography</option>
+                                    <option value="Fantasy">Fantasy</option>
+                                    <option value="Science Fiction">Science Fiction</option>
                                 </select>
                             </div>
 
@@ -67,6 +90,7 @@ const AddBook = () => {
                                 </label>
                                 <input
                                     type="number"
+                                    name='quantity'
                                     min="1"
                                     required
                                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
@@ -81,6 +105,7 @@ const AddBook = () => {
                                 </label>
                                 <input
                                     type="number"
+                                    name='rating'
                                     min="0"
                                     max="5"
                                     step="0.1"
@@ -100,6 +125,7 @@ const AddBook = () => {
                                 <div className="space-y-4">
                                     <input
                                         type="url"
+                                        name='bookimage'
                                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                                         placeholder="Enter image URL or upload below"
                                     />
@@ -116,6 +142,7 @@ const AddBook = () => {
                                 <textarea
                                     required
                                     rows={4}
+                                    name='description'
                                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
                                     placeholder="Enter a brief description of the book"
                                 />
@@ -126,6 +153,7 @@ const AddBook = () => {
                                 </label>
                                 <textarea
                                     rows={6}
+                                    name='booksummary'
                                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
                                     placeholder="Enter detailed content or summary of the book"
                                 />

@@ -1,14 +1,8 @@
 import React from 'react';
-import { Eye, Package, SquarePen, Tag, User } from 'lucide-react';
-import { Link, useLoaderData } from 'react-router';
-const AllBook = () => {
-    const AllBookData = useLoaderData()
-    console.log(AllBookData)
+
+const AllBookCard = () => {
     return (
-        <div>
-            <h1 className='py-8 text-4xl font-bold text-center'>All Books</h1>
-            <div className='grid grid-cols-4 gap-6 w-10/13 mx-auto'>
-                <div className='  rounded-b-xl shadow-lg'>
+        <div className='  rounded-b-xl shadow-lg'>
                     <div className='relative'>
                         <img className='rounded-t-xl h-55 w-full' src="https://images.pexels.com/photos/1130980/pexels-photo-1130980.jpeg" />
                         <span className='bg-gray-200 absolute top-3 left-3 px-3 py-1 flex items-center space-x-1.5 rounded-2xl'><Tag size={17} /><span className='text-xs pb-0.5'>Drama</span></span>
@@ -49,9 +43,7 @@ const AllBook = () => {
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
     );
 };
 
-export default AllBook;
+export default AllBookCard;

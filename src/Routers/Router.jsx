@@ -8,34 +8,37 @@ import AllBook from "../Pages/AllBook";
 import BorrowedBooks from "../Pages/BorrowedBooks";
 
 export const Router = createBrowserRouter([
-    {
-        path: "/",
-        Component: Root,
-        children: [
-            {
-                path: '/',
-                Component: HomeLayout
-            },
-            {
-                path: '/categories/Book',
-                Component: CategoryBookPage
-            },
-            {
-                path: '/view-details',
-                Component: BookDetails 
-            },
-            {
-                path: "/add-book",
-                Component: AddBook
-            },
-            {
-                path: "/all-Book",
-                Component : AllBook
-            },
-            {
-                path: "/Borrowed-Books",
-                Component: BorrowedBooks
-            }
-        ]
-    }
+{
+    path: "/",
+    Component: Root,
+    children: [
+        {
+            path: '/',
+            Component: HomeLayout
+        },
+        {
+            path: '/categories/:id',
+            loader: ({ params }) => fetch(`http://localhost:3000/books/${params.id}`),
+            Component: CategoryBookPage
+        },
+        {
+            path: '/view-details/:id',
+            loader: ({ params }) => fetch(`http://localhost:3000/books/${params.id}`),
+            Component: BookDetails
+        },
+        {
+            path: "/add-book",
+            Component: AddBook
+        },
+        {
+            path: "/all-Book",
+            loader: () => fetch(`http://localhost:3000/books`),
+            Component: AllBook
+        },
+        {
+            path: "/Borrowed-Books",
+            Component: BorrowedBooks
+        }
+    ]
+}
 ])
