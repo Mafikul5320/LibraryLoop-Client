@@ -1,12 +1,26 @@
-import React from "react";
+import React, { use } from "react";
 import { BookOpen, Calendar, CalendarDays, Download, Package, Tag, User } from "lucide-react";
 import { useLoaderData } from "react-router";
 import StarRatings from "react-star-ratings";
+import { AuthContext } from "../Context/AuthContext";
 
 const BookDetails = () => {
+  const { user } = use(AuthContext)
   const data = useLoaderData()
   console.log(data)
-  const { bookimage, bookname, quantity, rating, authorname, category, description, booksummary,_id } = data
+  const { bookimage, bookname, quantity, rating, authorname, category, description, booksummary, _id } = data
+  const handleBorrowBook = (e) => {
+    e.preventDefault()
+    const form = e.target;
+    const formData = new FormData(form)
+    const data = Object.fromEntries(formData.entries())
+    const { displayName, date, email } = data;
+    const server = {
+      displayName, date, email, bookID: _id
+    }
+    console.log(server)
+
+  }
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -59,19 +73,92 @@ const BookDetails = () => {
 
               {/* Action Buttons */}
               <div className="mt-6 space-y-3">
+
+                {/* Borrow Book Button to open modal */}
                 <button
+                  onClick={() => document.getElementById('my_modal_4').showModal()}
                   className="w-full flex items-center justify-center space-x-2 px-6 py-4 bg-gradient-to-r from-blue-600 to-teal-600 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-teal-700 transition-all duration-200"
                 >
                   <span className="w-5 h-5"><Download size={19} /></span>
                   <span>Borrow Book</span>
                 </button>
 
+                {/* Modal Dialog */}
+                <dialog id="my_modal_4" className="modal">
+                  <div className="modal-box w-xl">
+                    <form
+                      onSubmit={handleBorrowBook} // ✅ Correctly reference the function (remove quotes)
+                      className="bg-white rounded-2xl p-8 max-w-md w-full space-y-4"
+                      method="dialog"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <h3 className="text-2xl font-bold text-gray-900 mb-6">Borrow Book</h3>
+
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Your Name
+                        </label>
+                        <input
+                          type="text"
+                          name="displayName"
+                          value={user?.displayName}
+                          readOnly
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Your Email
+                        </label>
+                        <input
+                          type="email"
+                          name="email"
+                          value={user?.email}
+                          readOnly
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Return Date *
+                        </label>
+                        <input
+                          type="date"
+                          name="date"
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                          required
+                        />
+                      </div>
+
+                      <div className="flex items-center space-x-3 justify-between pt-4">
+                        <button
+                          type="button"
+                          onClick={() => document.getElementById('my_modal_4').close()}
+                          className="px-4 w-full py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+                        >
+                          Close
+                        </button>
+                        <button
+                          type="submit"
+                          className="bg-gradient-to-r from-blue-600 to-teal-600 w-full text-white px-4 py-3 rounded-lg hover:from-blue-700 hover:to-teal-700 transition-all duration-200"
+                        >
+                          Confirm Borrow
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </dialog>
+
+                {/* Update Book Button */}
                 <button
                   className="w-full px-6 py-3 border-2 border-blue-600 text-blue-600 font-semibold rounded-lg hover:bg-blue-600 hover:text-white transition-all duration-200"
                 >
                   Update Book
                 </button>
               </div>
+
             </div>
           </div>
 
@@ -142,15 +229,15 @@ const BookDetails = () => {
                     <h3 className="font-semibold text-gray-900 mb-2">Rating</h3>
                     <div className="flex items-center">
                       <div>
-                      <StarRatings
-                        rating={parseFloat(rating)}
-                        starRatedColor="#ffd700"
-                        numberOfStars={5}
-                        name="rating"
-                        starDimension="19px"
-                        starSpacing="2px"
-                      />
-                    </div>
+                        <StarRatings
+                          rating={parseFloat(rating)}
+                          starRatedColor="#ffd700"
+                          numberOfStars={5}
+                          name="rating"
+                          starDimension="19px"
+                          starSpacing="2px"
+                        />
+                      </div>
                       <span className="ml-2 text-gray-600">({rating}/5)</span>
                     </div>
                   </div>
