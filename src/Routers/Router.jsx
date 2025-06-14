@@ -8,6 +8,7 @@ import AllBook from "../Pages/AllBook";
 import BorrowedBooks from "../Pages/BorrowedBooks";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
+import UpdateBook from "../Pages/UpdateBook";
 
 export const Router = createBrowserRouter([
 {
@@ -48,6 +49,11 @@ export const Router = createBrowserRouter([
         {
             path: "/register",
             Component: Register
+        },
+        {
+            path: "/update-book/:id",
+            loader: ({ params }) => fetch(`http://localhost:3000/books/${params.id}`),
+            Component: UpdateBook
         }
     ]
 }

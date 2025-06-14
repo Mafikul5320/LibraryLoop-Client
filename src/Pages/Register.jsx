@@ -4,17 +4,20 @@ import { Link } from 'react-router';
 import { AuthContext } from '../Context/AuthContext';
 
 const Register = () => {
-    const { Register } = use(AuthContext)
+    const { Register, UpdateUser } = use(AuthContext)
     const handleSubmit = (e) => {
         e.preventDefault()
         const form = e.target;
         const formData = new FormData(form);
-        const data  = Object.fromEntries(formData.entries())
-        const { email, password } = data;
+        const data = Object.fromEntries(formData.entries())
+        const { email, password, ...remain } = data;
         
-        Register(email,password).then(res=>{
+        Register(email, password).then(res => {
             console.log(res)
-        }).catch(error=>{
+            UpdateUser(remain).then(() => {
+                console.log("Profile update")
+            })
+        }).catch(error => {
             console.log(error)
         })
         console.log(data)

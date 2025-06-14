@@ -36,7 +36,7 @@ const AllBookCard = ({ onebook }) => {
                     <Link to={`/view-details/${_id}`} className='btn py-6 bg-gradient-to-r from-blue-600 to-teal-600 text-white rounded-lg font-semibold text-base w-[83%] '><Eye size={17} />
                         View Details
                     </Link>
-                    <Link to={"/add-book"}
+                    <Link to={`/update-book/${_id}`}
                         className=" px-4 py-3 border-2 border-gray-500 text-gray-600 font-semibold rounded-lg hover:bg-gray-200 transition-all duration-200"
                     >
                         <SquarePen size={18} />
