@@ -1,24 +1,42 @@
-import React, { use } from 'react';
+import React, { use, useState } from 'react';
 import logo from '../assets/logo.jpg'
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { AuthContext } from '../Context/AuthContext';
+import Swal from 'sweetalert2';
 
 const Register = () => {
     const { Register, UpdateUser } = use(AuthContext)
+    const [Error, setError] = useState("");
+    const Navigate = useNavigate()
     const handleSubmit = (e) => {
         e.preventDefault()
         const form = e.target;
         const formData = new FormData(form);
         const data = Object.fromEntries(formData.entries())
         const { email, password, ...remain } = data;
-        
+        setError("")
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+        if (!passwordRegex.test(password) == true) {
+            return setError('Password must have uppercase , lowercase , and 6 characters long')
+        }
+
         Register(email, password).then(res => {
             console.log(res)
             UpdateUser(remain).then(() => {
                 console.log("Profile update")
+                Navigate("/")
+                Swal.fire({
+                    title: "Register Successfull!",
+                    icon: "success",
+                    draggable: true
+                });
             })
-        }).catch(error => {
-            console.log(error)
+        }).catch(() => {
+            Swal.fire({
+                title: "Failed to Register!",
+                icon: "error",
+                draggable: true
+            });
         })
         console.log(data)
     }
@@ -33,7 +51,7 @@ const Register = () => {
                     <input type="email" name='email' placeholder="Enter Email" className="input h-11 rounded-full  w-full" required />
                     <input type="text" name='photoURL' placeholder="Photo URL" className="input h-11 rounded-full  w-full" required />
                     <input type="password" name='password' placeholder="Enter Password" className="input h-11 rounded-full  w-full" required />
-                    <p className='text-red-500'>{"error"}</p>
+                    <p className='text-red-500'>{Error}</p>
                     <button className='btn h-11  bg-gradient-to-r from-blue-600 to-teal-600 text-white rounded-full  w-full' type='submit'>Register</button>
 
                 </form>

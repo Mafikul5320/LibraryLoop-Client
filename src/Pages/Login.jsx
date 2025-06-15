@@ -1,30 +1,50 @@
 import { BookOpen } from 'lucide-react';
 import React, { use } from 'react';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import logo from '../assets/logo.jpg'
 import { AuthContext } from '../Context/AuthContext';
 import { GoogleAuthProvider } from 'firebase/auth';
+import Swal from 'sweetalert2';
 
 const Login = () => {
     const { Login, GoogleSignIn } = use(AuthContext)
-    const Provider = new GoogleAuthProvider()
+    const Provider = new GoogleAuthProvider();
+    const navigate = useNavigate()
     const handleSubmit = (e) => {
         e.preventDefault()
         const from = e.target;
         const formData = new FormData(from);
         const { email, password } = Object.fromEntries(formData.entries())
-        Login(email, password).then(res => {
-            console.log(res)
+        Login(email, password).then(() => {
+            navigate("/")
+            Swal.fire({
+                title: "Login Successfull!",
+                icon: "success",
+                draggable: true
+            });
         }).catch(error => {
             console.log(error)
+            Swal.fire({
+                title: "Failed to Login!",
+                icon: "error",
+                draggable: true
+            });
         })
-        console.log('')
     }
     const handelGoogleLogin = () => {
-        GoogleSignIn(Provider).then(res=>{
-            console.log(res)
-        }).catch(error=>{
-            console.log(error)
+        GoogleSignIn(Provider).then(() => {
+            navigate("/")
+            Swal.fire({
+                title: "Login Successfull!",
+                icon: "success",
+                draggable: true
+            });
+        }).catch(() => {
+            Swal.fire({
+                title: "Failed to Login!",
+                icon: "error",
+                draggable: true
+            });
         })
     }
     return (

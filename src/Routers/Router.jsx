@@ -10,63 +10,70 @@ import Login from "../Pages/Login";
 import Register from "../Pages/Register";
 import UpdateBook from "../Pages/UpdateBook";
 import PrivateRouter from "../components/PrivateRouter";
+import NotFound from "../Pages/NotFound";
 
 export const Router = createBrowserRouter([
-{
-    path: "/",
-    Component: Root,
-    children: [
-        {
-            path: '/',
-            Component: HomeLayout
-        },
-        {
-            path: '/categories/:id',
-            loader: ({ params }) => fetch(`http://localhost:3000/books/${params.id}`),
-            Component: CategoryBookPage
-        },
-        {
-            path: '/view-details/:id',
-            loader: ({ params }) => fetch(`http://localhost:3000/books/${params.id}`),
-            element: <PrivateRouter>
-                <BookDetails></BookDetails>
-            </PrivateRouter>
-        },
-        {
-            path: "/add-book",
-            element: <PrivateRouter>
-                <AddBook></AddBook>
-            </PrivateRouter>
-        },
-        {
-            path: "/all-Book",
-            loader: () => fetch(`http://localhost:3000/books`),
-            element: <PrivateRouter>
-                <AllBook></AllBook>
-            </PrivateRouter>
-        },
-        {
-            path: "/Borrowed-Books/:email",
-            loader:({params})=>fetch(`http://localhost:3000/Borrow/${params.email}`),
-            element: <PrivateRouter>
-                <BorrowedBooks></BorrowedBooks>
-            </PrivateRouter>
-        },
-        {
-            path: '/login',
-            Component: Login
-        },
-        {
-            path: "/register",
-            Component: Register
-        },
-        {
-            path: "/update-book/:id",
-            loader: ({ params }) => fetch(`http://localhost:3000/books/${params.id}`),
-            element: <PrivateRouter>
-                <UpdateBook></UpdateBook>
-            </PrivateRouter>
-        }
-    ]
-}
+    {
+        path: "/",
+        Component: Root,
+        children: [
+            {
+                path: '/',
+                Component: HomeLayout
+            },
+            {
+                path: '/categories/:id',
+                loader: ({ params }) => fetch(`http://localhost:3000/books/${params.id}`),
+                Component: CategoryBookPage
+            },
+            {
+                path: '/view-details/:id',
+                loader: ({ params }) => fetch(`http://localhost:3000/books/${params.id}`),
+                element: <PrivateRouter>
+                    <BookDetails></BookDetails>
+                </PrivateRouter>
+            },
+            {
+                path: "/add-book",
+                element: <PrivateRouter>
+                    <AddBook></AddBook>
+                </PrivateRouter>
+            },
+            {
+                path: "/all-Book",
+                loader: () => fetch(`http://localhost:3000/books`),
+                element: <PrivateRouter>
+                    <AllBook></AllBook>
+                </PrivateRouter>
+            },
+            {
+                path: "/Borrowed-Books/:email",
+                loader: ({ params }) => fetch(`http://localhost:3000/Borrow/${params.email}`),
+                element: <PrivateRouter>
+                    <BorrowedBooks></BorrowedBooks>
+                </PrivateRouter>
+            },
+            {
+                path: '/login',
+                Component: Login
+            },
+            {
+                path: "/register",
+                Component: Register
+            },
+            {
+                path: "/update-book/:id",
+                loader: ({ params }) => fetch(`http://localhost:3000/books/${params.id}`),
+                element: <PrivateRouter>
+                    <UpdateBook></UpdateBook>
+                </PrivateRouter>
+            },
+
+        ],
+
+    },
+    {
+        path: "*",
+        Component: NotFound
+    },
 ])

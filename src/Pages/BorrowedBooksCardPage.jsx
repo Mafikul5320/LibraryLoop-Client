@@ -1,5 +1,6 @@
 import { BookOpen, RefreshCcw } from 'lucide-react';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 const BorrowedBooksCardPage = ({ oneborror, borrowData, setBorrowData }) => {
     const { bookimage, bookname, authorname, category, borrowedDate, returnDate, quantity, bookID, _id } = oneborror;
     console.log(_id)
@@ -7,6 +8,7 @@ const BorrowedBooksCardPage = ({ oneborror, borrowData, setBorrowData }) => {
         quantity
     }
     const handelReturn = () => {
+
         axios.put(`http://localhost:3000/books/${bookID}`, server).then(res => {
             console.log(res.data)
         })
@@ -14,12 +16,22 @@ const BorrowedBooksCardPage = ({ oneborror, borrowData, setBorrowData }) => {
             console.log(res.data)
             if (res.data.deletedCount) {
                 const remain = borrowData.filter(one => one?._id !== _id)
+                Swal.fire({
+                    icon: "success",
+                    title: "Book returned successfully!",
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+                console.log("TOAST")
                 setBorrowData(remain)
+
             }
         })
     }
     return (
+
         <div className="flex items-center my-3 justify-between bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300">
+            
             {/* Book Cover and Info */}
             <div className="flex items-start gap-4 ">
                 <div className='relative'>

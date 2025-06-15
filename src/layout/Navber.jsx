@@ -35,7 +35,7 @@ const Navber = () => {
                     user ? <div className='flex items-center space-x-2 '>
                         <div className='rounded-full relative group'>
                             <img className='w-12 h-12 border-2 border-b-cyan-600 rounded-full' src={user?.photoURL} />
-                            <div className='bg-black text-white py-1 px-3 opacity-0 group-hover:opacity-100 absolute rounded-lg'>
+                            <div className='bg-black font-semibold text-white py-1 px-3 opacity-0 group-hover:opacity-100 absolute rounded-lg'>
                                 {user?.displayName}
                             </div>
                         </div>

@@ -1,6 +1,6 @@
 import React, { use, useState } from "react";
 import { BookOpen, Calendar, CalendarDays, Download, Package, Tag, User } from "lucide-react";
-import { useLoaderData } from "react-router";
+import { Link, useLoaderData } from "react-router";
 import StarRatings from "react-star-ratings";
 import { AuthContext } from "../Context/AuthContext";
 import axios from "axios";
@@ -47,6 +47,7 @@ const BookDetails = () => {
   }
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 py-8">
+      <title>Book Details || LibraryLoop</title>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Back Button */}
         <div className="mb-6">
@@ -72,7 +73,9 @@ const BookDetails = () => {
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <span className="text-gray-600">Availability:</span>
-                  <span className="font-semibold text-green-600">{countQuantity} available</span>
+                  {
+                    countQuantity === 0 ? <span className="font-semibold text-red-600">Out of Stock</span> : <span className="font-semibold text-green-600">{countQuantity} available</span>
+                  }
                 </div>
 
                 <div className="flex items-center justify-between">
@@ -101,10 +104,11 @@ const BookDetails = () => {
                 {/* Borrow Book Button to open modal */}
                 <button
                   onClick={() => document.getElementById('my_modal_4').showModal()}
-                  className="w-full flex items-center justify-center space-x-2 px-6 py-4 bg-gradient-to-r from-blue-600 to-teal-600 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-teal-700 transition-all duration-200"
+                  className={`w-full flex items-center justify-center space-x-2 px-6 py-4 bg-gradient-to-r from-blue-600 to-teal-600 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-teal-700 transition-all duration-200 ${countQuantity === 0 && 'cursor-not-allowed'}`}
+                  disabled={countQuantity === 0}
                 >
                   <span className="w-5 h-5"><Download size={19} /></span>
-                  <span>Borrow Book</span>
+                  <span>{countQuantity === 0 ? "Out of Stock" : "Borrow Book"}</span>
                 </button>
 
                 {/* Modal Dialog */}
@@ -176,11 +180,13 @@ const BookDetails = () => {
                 </dialog>
 
                 {/* Update Book Button */}
-                <button
-                  className="w-full px-6 py-3 border-2 border-blue-600 text-blue-600 font-semibold rounded-lg hover:bg-blue-600 hover:text-white transition-all duration-200"
-                >
-                  Update Book
-                </button>
+                <Link to={`/update-book/${_id}`}>
+                  <button
+                    className="w-full px-6 py-3 border-2 border-blue-600 text-blue-600 font-semibold rounded-lg hover:bg-blue-600 hover:text-white transition-all duration-200"
+                  >
+                    Update Book
+                  </button>
+                </Link>
               </div>
 
             </div>

@@ -33,6 +33,7 @@ const UpdateBook = () => {
     return (
         <div>
             <h1 className='text-4xl font-bold text-center py-5'>Update the Book</h1>
+            <title>Update Book|| LibraryLoop</title>
             <div className='bg-white p-5 shadow-xl rounded-lg  w-10/13 mx-auto my-9'>
                 <form onSubmit={Handelsubmit} className="space-y-8">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">

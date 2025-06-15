@@ -5,20 +5,26 @@ import { auth } from '../Firebase/firebase.init';
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
+    const [loading, setLoading] = useState(true)
 
     const Register = (email, password) => {
+        setLoading(true)
         return createUserWithEmailAndPassword(auth, email, password)
     };
     const Login = (email, password) => {
+        setLoading(true)
         return signInWithEmailAndPassword(auth, email, password)
     };
     const GoogleSignIn = (Provider) => {
+        setLoading(true)
         return signInWithPopup(auth, Provider)
     };
     const UpdateUser = (updateData) => {
+        setLoading(true)
         return updateProfile(auth.currentUser, updateData)
     };
-    const SignOut =()=>{
+    const SignOut = () => {
+        setLoading(true)
         return signOut(auth)
     }
     useEffect(() => {
@@ -30,6 +36,7 @@ const AuthProvider = ({ children }) => {
             else {
                 console.log("logout User")
             }
+            setLoading(false)
         })
         return () => {
             unsubscribe()
@@ -43,7 +50,8 @@ const AuthProvider = ({ children }) => {
         UpdateUser,
         user,
         SignOut,
-        setUser
+        setUser,
+        loading
     }
 
     return (

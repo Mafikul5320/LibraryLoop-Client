@@ -14,6 +14,7 @@ const BorrowedBooks = () => {
   }).catch(error => console.log(error))
   return (
     <div className='bg-[#f0f7fe] min-h-screen'>
+      <title>Borrowed Books || LibraryLoop</title>
       <div className='w-10/13 mx-auto py-8'>
         <div className='flex justify-center text-white items-center mx-auto text-wh bg-gradient-to-r from-blue-600 to-teal-600 w-25 h-25 rounded-full'>
           <BookMarked size={60} />

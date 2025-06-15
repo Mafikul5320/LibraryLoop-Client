@@ -13,7 +13,8 @@ const AddBook = () => {
         console.log(bookData)
         axios.post('http://localhost:3000/books', bookData).then(res => {
             console.log(res.data)
-            if (res.data.insertedId) {
+
+            if (res.data.acknowledged) {
                 Swal.fire({
                     icon: "success",
                     title: "Your Book Add Successfull!",
@@ -25,6 +26,7 @@ const AddBook = () => {
     }
     return (
         <div className='w-10/13 mx-auto my-9'>
+            <title>Add Book || LibraryLoop</title>
             <div className='flex justify-center items-center'>
                 <img className='w-11 h-11 rounded-xl' src={logo} />
                 <h1 className='text-5xl font-bold pl-3'>Add New Book</h1>

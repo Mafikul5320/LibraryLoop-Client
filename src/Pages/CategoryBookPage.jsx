@@ -8,6 +8,7 @@ const CategoryBookPage = () => {
     console.log(Bookdata)
     return (
         <div>
+            <title>Book Category|| LibraryLoop</title>
             <h1 className='py-8 text-4xl font-bold text-center'>All Books</h1>
             <div className='grid grid-cols-4 gap-6 w-10/13 mx-auto'>
                 {
