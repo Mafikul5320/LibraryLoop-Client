@@ -1,11 +1,17 @@
-import { User } from 'lucide-react';
+import { LogOut, User } from 'lucide-react';
 import logo from '../assets/logo.jpg'
 import { Link, NavLink } from 'react-router';
 import { use } from 'react';
 import { AuthContext } from '../Context/AuthContext';
 
 const Navber = () => {
-    const { user } = use(AuthContext)
+    const { user, SignOut, setUser } = use(AuthContext)
+    const handelLogout = () => {
+        SignOut().then(() => {
+            console.log("user SignOut")
+            setUser(null)
+        })
+    }
     return (
         <div className='bg-white/90 backdrop-blur-md shadow-xl py-3 sticky top-0 left-0 z-50 w-full'>
             <div className='w-10/13 mx-auto flex justify-between items-center'>
@@ -25,12 +31,19 @@ const Navber = () => {
                     <button className='text-base font-semibold text-gray-500'><NavLink to={`/Borrowed-Books/${user?.email}`} className={({ isActive }) => isActive && "text-blue-600 border-b-2 pb-1"}>Borrowed Books</NavLink></button>
                 </div>
                 {/* Right site */}
-                <div className='flex items-center space-x-4'>
-                    <button className='text-base font-semibold'><NavLink to={'/login'} className={({ isActive }) => isActive && "text-blue-600 border-b-2 pb-1"}>Login</NavLink></button>
-                    <Link to={"/register"}>
-                        <button className='btn bg-gradient-to-r from-blue-600 to-teal-600 text-white rounded-lg text-base'>Register</button>
-                    </Link>
-                </div>
+                {
+                    user ? <div className='flex items-center space-x-2'>
+                        <div className='  rounded-full'>
+                            <img className='w-12 h-12 border-2 border-b-cyan-600 rounded-full' src={user?.photoURL} />
+                        </div>
+                        <button onClick={handelLogout} className='btn bg-gradient-to-r from-blue-600 to-teal-600 text-white rounded-lg text-base'><LogOut size={18} />Logout</button>
+                    </div> : <div className='flex items-center space-x-4'>
+                        <button className='text-base font-semibold'><NavLink to={'/login'} className={({ isActive }) => isActive && "text-blue-600 border-b-2 pb-1"}>Login</NavLink></button>
+                        <Link to={"/register"}>
+                            <button className='btn bg-gradient-to-r from-blue-600 to-teal-600 text-white rounded-lg text-base'>Register</button>
+                        </Link>
+                    </div>
+                }
             </div>
         </div>
     );

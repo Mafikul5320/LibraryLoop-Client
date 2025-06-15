@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { BookOpen, RefreshCcw } from 'lucide-react';
 import axios from 'axios';
 const BorrowedBooksCardPage = ({ oneborror, borrowData, setBorrowData }) => {

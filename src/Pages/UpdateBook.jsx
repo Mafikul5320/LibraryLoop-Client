@@ -13,8 +13,11 @@ const UpdateBook = () => {
         const form = e.target;
         const formData = new FormData(form)
         const submitdata = Object.fromEntries(formData.entries())
+        const quantity = submitdata.quantity
+            submitdata.quantity = parseInt(quantity)
         console.log(submitdata)
         axios.put(`http://localhost:3000/books/${_id}`, submitdata).then(res => {
+            console.log(res.data)
             if (res.data.modifiedCount) {
                 Swal.fire({
                     icon: "success",
