@@ -9,6 +9,7 @@ import BorrowedBooks from "../Pages/BorrowedBooks";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
 import UpdateBook from "../Pages/UpdateBook";
+import PrivateRouter from "../components/PrivateRouter";
 
 export const Router = createBrowserRouter([
 {
@@ -27,21 +28,29 @@ export const Router = createBrowserRouter([
         {
             path: '/view-details/:id',
             loader: ({ params }) => fetch(`http://localhost:3000/books/${params.id}`),
-            Component: BookDetails
+            element: <PrivateRouter>
+                <BookDetails></BookDetails>
+            </PrivateRouter>
         },
         {
             path: "/add-book",
-            Component: AddBook
+            element: <PrivateRouter>
+                <AddBook></AddBook>
+            </PrivateRouter>
         },
         {
             path: "/all-Book",
             loader: () => fetch(`http://localhost:3000/books`),
-            Component: AllBook
+            element: <PrivateRouter>
+                <AllBook></AllBook>
+            </PrivateRouter>
         },
         {
             path: "/Borrowed-Books/:email",
             loader:({params})=>fetch(`http://localhost:3000/Borrow/${params.email}`),
-            Component: BorrowedBooks
+            element: <PrivateRouter>
+                <BorrowedBooks></BorrowedBooks>
+            </PrivateRouter>
         },
         {
             path: '/login',
@@ -54,7 +63,9 @@ export const Router = createBrowserRouter([
         {
             path: "/update-book/:id",
             loader: ({ params }) => fetch(`http://localhost:3000/books/${params.id}`),
-            Component: UpdateBook
+            element: <PrivateRouter>
+                <UpdateBook></UpdateBook>
+            </PrivateRouter>
         }
     ]
 }
