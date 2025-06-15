@@ -3,6 +3,8 @@ import { BookOpen, Calendar, CalendarDays, Download, Package, Tag, User } from "
 import { useLoaderData } from "react-router";
 import StarRatings from "react-star-ratings";
 import { AuthContext } from "../Context/AuthContext";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const BookDetails = () => {
   const { user } = use(AuthContext)
@@ -11,13 +13,33 @@ const BookDetails = () => {
   const { bookimage, bookname, quantity, rating, authorname, category, description, booksummary, _id } = data
   const handleBorrowBook = (e) => {
     e.preventDefault()
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+
+    const todayDate = `${year}-${month}-${day}`;
     const form = e.target;
     const formData = new FormData(form)
     const data = Object.fromEntries(formData.entries())
     const { displayName, date, email } = data;
     const server = {
-      displayName, date, email, bookID: _id
+      displayName,returnDate: date, email, bookID: _id, quantity, borrowedDate: todayDate
     }
+    axios.post(`http://localhost:3000/Borrow/${_id}`, server).then(res => {
+      console.log(res.data)
+      if (res.data.insertedId) {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Your Borrow Book has been saved",
+          showConfirmButton: false,
+          timer: 1500
+        });
+      }
+    }).catch(error => {
+      console.log(error)
+    })
     console.log(server)
 
   }
