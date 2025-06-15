@@ -61,7 +61,6 @@ const BorrowedBooks = () => {
         </div>
       </div>
       <div className='w-10/13 mx-auto'>
-        <BookFilter></BookFilter>
         <Suspense>
           <BorrowedBooksCard BorrowedBooksData={BorrowedBooksData}></BorrowedBooksCard>
         </Suspense>
