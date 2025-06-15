@@ -1,4 +1,4 @@
-import React, { use } from "react";
+import React, { use, useState } from "react";
 import { BookOpen, Calendar, CalendarDays, Download, Package, Tag, User } from "lucide-react";
 import { useLoaderData } from "react-router";
 import StarRatings from "react-star-ratings";
@@ -10,7 +10,8 @@ const BookDetails = () => {
   const { user } = use(AuthContext)
   const data = useLoaderData()
   console.log(data)
-  const { bookimage, bookname, quantity, rating, authorname, category, description, booksummary, _id } = data
+  const { bookimage, bookname, quantity, rating, authorname, category, description, booksummary, _id } = data;
+  const [countQuantity, setcountQuantity] = useState(quantity)
   const handleBorrowBook = (e) => {
     e.preventDefault()
     const today = new Date();
@@ -24,11 +25,12 @@ const BookDetails = () => {
     const data = Object.fromEntries(formData.entries())
     const { displayName, date, email } = data;
     const server = {
-      displayName,returnDate: date, email, bookID: _id, quantity, borrowedDate: todayDate
+      displayName, returnDate: date, email, bookID: _id, quantity, borrowedDate: todayDate
     }
     axios.post(`http://localhost:3000/Borrow/${_id}`, server).then(res => {
       console.log(res.data)
       if (res.data.insertedId) {
+        setcountQuantity(prev => prev - 1)
         Swal.fire({
           position: "top-end",
           icon: "success",
@@ -70,7 +72,7 @@ const BookDetails = () => {
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <span className="text-gray-600">Availability:</span>
-                  <span className="font-semibold text-green-600">{quantity} available</span>
+                  <span className="font-semibold text-green-600">{countQuantity} available</span>
                 </div>
 
                 <div className="flex items-center justify-between">
@@ -207,7 +209,7 @@ const BookDetails = () => {
 
                 <div className="flex items-center text-gray-600">
                   <span className="w-5 h-5 mr-2"><Package /></span>
-                  <span>{quantity} copies available</span>
+                  <span>{countQuantity} copies available</span>
                 </div>
               </div>
 
@@ -268,7 +270,7 @@ const BookDetails = () => {
                 <div className="space-y-4">
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-2">Availability</h3>
-                    <p className="font-medium text-green-600">{quantity} copies available</p>
+                    <p className="font-medium text-green-600">{countQuantity} copies available</p>
                   </div>
 
                   <div>

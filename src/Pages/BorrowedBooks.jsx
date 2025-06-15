@@ -1,9 +1,17 @@
 import { BookMarked, BookOpen } from 'lucide-react';
-import React from 'react';
+import React, { Suspense, use } from 'react';
 import BorrowedBooksCard from './BorrowedBooksCard';
 import BookFilter from '../components/BookFilter';
+import { AuthContext } from '../Context/AuthContext';
+import axios from 'axios';
+import { useLoaderData } from 'react-router';
 
 const BorrowedBooks = () => {
+  const { user } = use(AuthContext);
+  const BorrowedBooksData = useLoaderData()
+  axios.get(`http://localhost:3000/Borrow/${user?.email}`, { email: user?.email }).then(res => {
+    console.log(res.data)
+  }).catch(error => console.log(error))
   return (
     <div className='bg-[#f0f7fe] min-h-screen'>
       <div className='w-10/13 mx-auto py-8'>
@@ -52,8 +60,10 @@ const BorrowedBooks = () => {
         </div>
       </div>
       <div className='w-10/13 mx-auto'>
-      <BookFilter></BookFilter>
-        <BorrowedBooksCard></BorrowedBooksCard>
+        <BookFilter></BookFilter>
+        <Suspense>
+          <BorrowedBooksCard BorrowedBooksData={BorrowedBooksData}></BorrowedBooksCard>
+        </Suspense>
       </div>
     </div>
   );

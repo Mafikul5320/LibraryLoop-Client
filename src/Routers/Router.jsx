@@ -39,7 +39,8 @@ export const Router = createBrowserRouter([
             Component: AllBook
         },
         {
-            path: "/Borrowed-Books",
+            path: "/Borrowed-Books/:email",
+            loader:({params})=>fetch(`http://localhost:3000/Borrow/${params.email}`),
             Component: BorrowedBooks
         },
         {

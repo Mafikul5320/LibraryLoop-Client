@@ -1,7 +1,11 @@
+import { User } from 'lucide-react';
 import logo from '../assets/logo.jpg'
 import { Link, NavLink } from 'react-router';
+import { use } from 'react';
+import { AuthContext } from '../Context/AuthContext';
 
 const Navber = () => {
+    const { user } = use(AuthContext)
     return (
         <div className='bg-white/90 backdrop-blur-md shadow-xl py-3 sticky top-0 left-0 z-50 w-full'>
             <div className='w-10/13 mx-auto flex justify-between items-center'>
@@ -18,7 +22,7 @@ const Navber = () => {
 
                     <button className='text-base font-semibold text-gray-500'><NavLink to={"/add-book"} className={({ isActive }) => isActive && "text-blue-600 border-b-3 pb-1"}>Add Book</NavLink></button>
 
-                    <button className='text-base font-semibold text-gray-500'><NavLink to={"/Borrowed-Books"} className={({ isActive }) => isActive && "text-blue-600 border-b-2 pb-1"}>Borrowed Books</NavLink></button>
+                    <button className='text-base font-semibold text-gray-500'><NavLink to={`/Borrowed-Books/${user?.email}`} className={({ isActive }) => isActive && "text-blue-600 border-b-2 pb-1"}>Borrowed Books</NavLink></button>
                 </div>
                 {/* Right site */}
                 <div className='flex items-center space-x-4'>
