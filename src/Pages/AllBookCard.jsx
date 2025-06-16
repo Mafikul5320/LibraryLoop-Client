@@ -2,7 +2,7 @@ import React from 'react';
 import { Eye, Package, SquarePen, Tag, User } from 'lucide-react';
 import { Link } from 'react-router';
 import StarRatings from 'react-star-ratings';
-const AllBookCard = ({ onebook, viewMode }) => {
+const AllBookCard = ({ onebook}) => {
     console.log(onebook)
     const { bookimage, category, authorname, quantity, bookname, description, rating, _id } = onebook;
 

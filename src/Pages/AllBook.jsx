@@ -12,7 +12,6 @@ const AllBook = () => {
     const displayBook = showAvailableOnly ? allBook.filter(onebook => onebook.quantity > 0) : allBook
     console.log(AllBookData)
 
-
     return (
         <div className='bg-blue-50/60'>
             <title>All Book || LibraryLoop</title>

@@ -1,6 +1,6 @@
-import React, { use, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import { BookOpen, Calendar, CalendarDays, Download, Package, Tag, User } from "lucide-react";
-import { Link, useLoaderData } from "react-router";
+import { Link, useLoaderData, useNavigate } from "react-router";
 import StarRatings from "react-star-ratings";
 import { AuthContext } from "../Context/AuthContext";
 import axios from "axios";
@@ -8,10 +8,25 @@ import Swal from "sweetalert2";
 
 const BookDetails = () => {
   const { user } = use(AuthContext)
-  const data = useLoaderData()
+  const data = useLoaderData();
+  const navigate = useNavigate()
+  const [borrowed, setBorrowed] = useState(null);
   console.log(data)
   const { bookimage, bookname, quantity, rating, authorname, category, description, booksummary, _id } = data;
   const [countQuantity, setcountQuantity] = useState(quantity)
+  useEffect(() => {
+    axios.get(`http://localhost:3000/Borrow/${user?.email}`).then(res => {
+      console.log(res.data)
+      const alredyBorrowed = res.data.find(oneBorred => oneBorred.email === user?.email && oneBorred.bookID == _id)
+      setBorrowed(alredyBorrowed)
+    })
+  }, [_id, user?.email])
+  console.log(borrowed)
+  const handelModal = () => {
+    document.getElementById('my_modal_4').close()
+    navigate(`/Borrowed-Books/${user?.email}`)
+
+  }
   const handleBorrowBook = (e) => {
     e.preventDefault()
     const today = new Date();
@@ -25,7 +40,7 @@ const BookDetails = () => {
     const data = Object.fromEntries(formData.entries())
     const { displayName, date, email } = data;
     const server = {
-      displayName, returnDate: date, email, bookID: _id, quantity, borrowedDate: todayDate
+      displayName, returnDate: date, email, bookID: _id, quantity, borrowedDate: todayDate, isReturned: false
     }
     axios.post(`http://localhost:3000/Borrow/${_id}`, server).then(res => {
       console.log(res.data)
@@ -104,11 +119,14 @@ const BookDetails = () => {
                 {/* Borrow Book Button to open modal */}
                 <button
                   onClick={() => document.getElementById('my_modal_4').showModal()}
-                  className={`w-full flex items-center justify-center space-x-2 px-6 py-4 bg-gradient-to-r from-blue-600 to-teal-600 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-teal-700 transition-all duration-200 ${countQuantity === 0 && 'cursor-not-allowed'}`}
-                  disabled={countQuantity === 0}
+                  className={`w-full flex items-center justify-center space-x-2 px-6 py-4 bg-gradient-to-r from-blue-600 to-teal-600 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-teal-700 transition-all duration-200 ${countQuantity === 0 || borrowed && 'cursor-not-allowed'}`}
+                  disabled={countQuantity === 0 || borrowed}
                 >
                   <span className="w-5 h-5"><Download size={19} /></span>
-                  <span>{countQuantity === 0 ? "Out of Stock" : "Borrow Book"}</span>
+                  <span>{borrowed ? "Already borrowed" : <>
+                    {countQuantity === 0 ? "Out of Stock" : "Borrow Book"}
+                  </>}</span>
+
                 </button>
 
                 {/* Modal Dialog */}
@@ -169,8 +187,10 @@ const BookDetails = () => {
                           Close
                         </button>
                         <button
+                          onClick={handelModal}
                           type="submit"
-                          className="bg-gradient-to-r from-blue-600 to-teal-600 w-full text-white px-4 py-3 rounded-lg hover:from-blue-700 hover:to-teal-700 transition-all duration-200"
+                          className={`bg-gradient-to-r from-blue-600 to-teal-600 w-full text-white px-4 py-3 rounded-lg hover:from-blue-700 hover:to-teal-700 transition-all duration-200 ${borrowed && 'cursor-not-allowed'}`}
+                          disabled={countQuantity === 0 || borrowed}
                         >
                           Confirm Borrow
                         </button>
