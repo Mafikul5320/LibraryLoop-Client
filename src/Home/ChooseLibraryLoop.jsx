@@ -10,7 +10,7 @@ const ChooseLibraryLoop = () => {
             <p className="text-xl text-center text-gray-600 max-w-3xl mx-auto leading-relaxed">
                 Experience the future of library management with our comprehensive platform designed to enhance your reading journey and connect you with a vibrant community of book lovers.
             </p>
-            <div className='grid grid-cols-3 gap-8 mt-11'>
+            <div className='grid md:grid-cols-3 gap-8 mt-11'>
                 <div className='bg-gradient-to-br py-12 px-8 from-gray-50 to-white  rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 h-full'>
                     <BookOpen className='text-blue-700 hover:scale-108 hover:rotate-6 duration-200 ' size={34} />
                     <h1 className='text-2xl pt-8 hover:text-blue-700  text-gray-900 font-bold'>Vast Collection</h1>

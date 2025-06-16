@@ -3,15 +3,17 @@ import React, { Suspense, use } from 'react';
 import BorrowedBooksCard from './BorrowedBooksCard';
 import BookFilter from '../components/BookFilter';
 import { AuthContext } from '../Context/AuthContext';
-import axios from 'axios';
-import { useLoaderData } from 'react-router';
+import useBorrowedBooksApi from '../Api/useBorrowedBooksApi';
 
 const BorrowedBooks = () => {
   const { user } = use(AuthContext);
-  const BorrowedBooksData = useLoaderData()
-  axios.get(`http://localhost:3000/Borrow/${user?.email}`, { email: user?.email }).then(res => {
-    console.log(res.data)
-  }).catch(error => console.log(error))
+  // const BorrowedBooksData = useLoaderData()
+  const { BorrowedBooksData } = useBorrowedBooksApi()
+
+
+  // axios.get(`http://localhost:3000/Borrow/${user?.email}`, { email: user?.email }).then(res => {
+  //   // console.log(res.data)
+  // }).catch(error => console.log(error))
   return (
     <div className='bg-[#f0f7fe] min-h-screen'>
       <title>Borrowed Books || LibraryLoop</title>
@@ -62,7 +64,7 @@ const BorrowedBooks = () => {
       </div>
       <div className='w-10/13 mx-auto'>
         <Suspense>
-          <BorrowedBooksCard BorrowedBooksData={BorrowedBooksData}></BorrowedBooksCard>
+          <BorrowedBooksCard BorrowedBooksData={BorrowedBooksData(user?.email)}></BorrowedBooksCard>
         </Suspense>
       </div>
     </div>

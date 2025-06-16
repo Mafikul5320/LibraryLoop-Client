@@ -5,19 +5,22 @@ import StarRatings from "react-star-ratings";
 import { AuthContext } from "../Context/AuthContext";
 import axios from "axios";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
-const BookDetails = () => {
+const BookDetails = ({ BookDetailsData }) => {
+  const axiosSecure = useAxiosSecure()
   const { user } = use(AuthContext)
-  const data = useLoaderData();
+  const data = use(BookDetailsData)
   const navigate = useNavigate()
   const [borrowed, setBorrowed] = useState(null);
   console.log(data)
   const { bookimage, bookname, quantity, rating, authorname, category, description, booksummary, _id } = data;
   const [countQuantity, setcountQuantity] = useState(quantity)
   useEffect(() => {
-    axios.get(`http://localhost:3000/Borrow/${user?.email}`).then(res => {
+    axiosSecure.get(`http://localhost:3000/Borrow/${user?.email}`).then(res => {
       console.log(res.data)
       const alredyBorrowed = res.data.find(oneBorred => oneBorred.email === user?.email && oneBorred.bookID == _id)
+      console.log(alredyBorrowed)
       setBorrowed(alredyBorrowed)
     })
   }, [_id, user?.email])

@@ -34,7 +34,7 @@ const Banner = () => {
             stats: { reviews: "25,000+", discussions: "1,000+", events: "50+" }
         }
     ];
-    console.log(slides)
+
     return (
         <div className='relative'>
             <Swiper
@@ -47,15 +47,17 @@ const Banner = () => {
                 {
                     slides.map((oneslide, index) => (
                         <SwiperSlide key={index}>
-                            <div className=''>
-                                <img src={oneslide.image} />
-                                <div className='absolute inset-0  bg-gradient-to-r from-black/60 to-black/40' />
-                                <div className='w-10/16 mx-auto flex justify-between items-center absolute inset-0  text-white'>
-                                    <div className="text-white max-w-xl space-y-7">
-                                        <h1 className="text-4xl md:text-6xl font-bold">{oneslide.title}</h1>
-                                        <h2 className="text-xl md:text-2xl text-blue-200 font-medium">{oneslide.subtitle}</h2>
-                                        <p className="text-lg text-gray-200">{oneslide.description}</p>
-                                        <div className="flex gap-4">
+                            <div className='relative w-full h-full'>
+                                <img src={oneslide.image} className='w-full h-full object-cover' />
+                                <div className='absolute inset-0 bg-gradient-to-r from-black/60 to-black/40'></div>
+
+                                <div className='absolute inset-0 flex flex-col-reverse md:flex-row justify-center items-center px-4 md:px-0'>
+                                    {/* Content */}
+                                    <div className="text-white max-w-xl space-y-6 text-center md:text-left md:mr-10 z-10">
+                                        <h1 className="text-3xl md:text-6xl font-bold">{oneslide.title}</h1>
+                                        <h2 className="text-lg md:text-2xl text-blue-200 font-medium">{oneslide.subtitle}</h2>
+                                        <p className="text-base md:text-lg text-gray-200">{oneslide.description}</p>
+                                        <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4">
                                             <button className="px-6 py-3 bg-gradient-to-r from-blue-600 to-teal-600 rounded-lg text-white font-semibold shadow-2xl">
                                                 {oneslide.cta}
                                             </button>
@@ -64,13 +66,13 @@ const Banner = () => {
                                             </button>
                                         </div>
                                     </div>
-                                    <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20"
-                                    >
-                                        <div className="grid grid-cols-3 gap-6">
-                                            {Object.entries(oneslide.stats).map(([key, value]) => (
-                                                <div className="text-center"
-                                                >
-                                                    <div className="text-2xl md:text-3xl font-bold text-white mb-2">
+
+                                    {/* Stats */}
+                                    <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 mt-10 md:mt-0 z-10">
+                                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
+                                            {Object.entries(oneslide.stats).map(([key, value], i) => (
+                                                <div className="text-center" key={i}>
+                                                    <div className="text-2xl md:text-3xl font-bold text-white mb-1">
                                                         {value}
                                                     </div>
                                                     <div className="text-blue-200 text-sm capitalize">

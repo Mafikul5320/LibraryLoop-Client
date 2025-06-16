@@ -1,10 +1,9 @@
 import { Eye, Package, SquarePen, Tag, User } from 'lucide-react';
-import React from 'react';
-import { Link, useLoaderData } from 'react-router';
+import React, { use } from 'react';
 import CategoryBookCard from './CategoryBookCard';
 
-const CategoryBookPage = () => {
-    const Bookdata = useLoaderData();
+const CategoryBookPage = ({CategoryBookData}) => {
+    const Bookdata = use(CategoryBookData);
     console.log(Bookdata)
     return (
         <div>

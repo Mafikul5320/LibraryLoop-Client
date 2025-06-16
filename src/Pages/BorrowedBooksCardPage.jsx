@@ -1,40 +1,42 @@
 import { BookOpen, RefreshCcw } from 'lucide-react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { motion } from 'framer-motion';
+
 const BorrowedBooksCardPage = ({ oneborror, borrowData, setBorrowData }) => {
     const { bookimage, bookname, authorname, category, borrowedDate, returnDate, quantity, bookID, _id } = oneborror;
-    console.log(_id)
-    const server = {
-        quantity
-    }
-    const handelReturn = () => {
 
+    const server = { quantity };
+
+    const handelReturn = () => {
         axios.put(`http://localhost:3000/books/${bookID}`, server).then(res => {
-            console.log(res.data)
-        })
+            console.log(res.data);
+        });
+
         axios.delete(`http://localhost:3000/Borrows/${_id}`).then(res => {
-            console.log(res.data)
             if (res.data.deletedCount) {
-                const remain = borrowData.filter(one => one?._id !== _id)
+                const remain = borrowData.filter(one => one?._id !== _id);
                 Swal.fire({
                     icon: "success",
                     title: "Book returned successfully!",
                     showConfirmButton: false,
                     timer: 1000
                 });
-                console.log("TOAST")
-                setBorrowData(remain)
-
+                setBorrowData(remain);
             }
-        })
-    }
-    return (
+        });
+    };
 
-        <div className="flex items-center my-3 justify-between bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300">
-            
+    return (
+        <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="flex items-center my-3 justify-between bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300"
+        >
             {/* Book Cover and Info */}
-            <div className="flex items-start gap-4 ">
-                <div className='relative'>
+            <div className="flex items-start gap-4">
+                <div className="relative">
                     <img
                         src={bookimage}
                         alt={bookname}
@@ -65,12 +67,15 @@ const BorrowedBooksCardPage = ({ oneborror, borrowData, setBorrowData }) => {
 
             {/* Right Side Buttons */}
             <div className="flex flex-col items-end space-y-2">
-                <button onClick={handelReturn} className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition">
+                <button
+                    onClick={handelReturn}
+                    className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition"
+                >
                     <RefreshCcw className="w-4 h-4" />
                     Return Book
                 </button>
             </div>
-        </div>
+        </motion.div>
     );
 };
 

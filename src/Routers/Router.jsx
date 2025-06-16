@@ -1,16 +1,17 @@
 import { createBrowserRouter } from "react-router";
 import Root from "../layout/Root";
 import HomeLayout from "../layout/HomeLayout";
-import CategoryBookPage from "../Pages/CategoryBookPage";
-import BookDetails from "../Pages/BookDetails";
 import AddBook from "../Pages/AddBook";
-import AllBook from "../Pages/AllBook";
 import BorrowedBooks from "../Pages/BorrowedBooks";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
 import UpdateBook from "../Pages/UpdateBook";
 import PrivateRouter from "../components/PrivateRouter";
 import NotFound from "../Pages/NotFound";
+import BookDetailsPage from "../Pages/BookDetailsPage";
+import AllBookPage from "../Pages/AllBookPage";
+import CategoryBookDataLoad from "../Pages/CategoryBookDataLoad";
+import UpdateBookPage from "../Pages/UpdateBookPage";
 
 export const Router = createBrowserRouter([
     {
@@ -23,14 +24,16 @@ export const Router = createBrowserRouter([
             },
             {
                 path: '/categories/:id',
-                loader: ({ params }) => fetch(`http://localhost:3000/books/${params.id}`),
-                Component: CategoryBookPage
+                // loader: ({ params }) => fetch(`http://localhost:3000/books/${params.id}`),
+                element: <PrivateRouter>
+                    <CategoryBookDataLoad></CategoryBookDataLoad>
+                </PrivateRouter>
             },
             {
                 path: '/view-details/:id',
-                loader: ({ params }) => fetch(`http://localhost:3000/books/${params.id}`),
+                // loader: ({ params }) => fetch(`http://localhost:3000/books/${params.id}`),
                 element: <PrivateRouter>
-                    <BookDetails></BookDetails>
+                    <BookDetailsPage></BookDetailsPage>
                 </PrivateRouter>
             },
             {
@@ -41,14 +44,14 @@ export const Router = createBrowserRouter([
             },
             {
                 path: "/all-Book",
-                loader: () => fetch(`http://localhost:3000/books`),
+                // loader: () => fetch(`http://localhost:3000/books`),
                 element: <PrivateRouter>
-                    <AllBook></AllBook>
+                    <AllBookPage></AllBookPage>
                 </PrivateRouter>
             },
             {
                 path: "/Borrowed-Books/:email",
-                loader: ({ params }) => fetch(`http://localhost:3000/Borrow/${params.email}`),
+                // loader: ({ params }) => fetch(`http://localhost:3000/Borrow/${params.email}`),
                 element: <PrivateRouter>
                     <BorrowedBooks></BorrowedBooks>
                 </PrivateRouter>
@@ -65,7 +68,7 @@ export const Router = createBrowserRouter([
                 path: "/update-book/:id",
                 loader: ({ params }) => fetch(`http://localhost:3000/books/${params.id}`),
                 element: <PrivateRouter>
-                    <UpdateBook></UpdateBook>
+                    <UpdateBookPage></UpdateBookPage>
                 </PrivateRouter>
             },
 

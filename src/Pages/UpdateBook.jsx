@@ -1,11 +1,10 @@
 import axios from 'axios';
 import { Save } from 'lucide-react';
-import React from 'react';
-import { useLoaderData } from 'react-router';
+import React, { use } from 'react';
 import Swal from 'sweetalert2';
 
-const UpdateBook = () => {
-    const data = useLoaderData()
+const UpdateBook = ({BookDetailsData}) => {
+    const data = use(BookDetailsData)
     console.log(data)
     const { bookimage, bookname, quantity, rating, authorname, category, description, booksummary, _id } = data;
     const Handelsubmit = (e) => {
@@ -18,7 +17,7 @@ const UpdateBook = () => {
         console.log(submitdata)
         axios.put(`http://localhost:3000/books/${_id}`, submitdata).then(res => {
             console.log(res.data)
-            if (res.data.modifiedCount) {
+            if (res.data.acknowledged) {
                 Swal.fire({
                     icon: "success",
                     title: "Book update successfull!",
