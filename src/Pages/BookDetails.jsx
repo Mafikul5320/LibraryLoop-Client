@@ -13,21 +13,22 @@ const BookDetails = ({ BookDetailsData }) => {
   const data = use(BookDetailsData)
   const navigate = useNavigate()
   const [borrowed, setBorrowed] = useState(null);
-  console.log(data)
+  const [alreadyborrowed, setalreadyborrowed] = useState(false)
+  // console.log(data)
   const { bookimage, bookname, quantity, rating, authorname, category, description, booksummary, _id } = data;
   const [countQuantity, setcountQuantity] = useState(quantity)
   useEffect(() => {
-    axiosSecure.get(`http://localhost:3000/Borrow/${user?.email}`).then(res => {
-      console.log(res.data)
+    axiosSecure.get(`https://assignment-11-server-zeta-orcin.vercel.app/Borrow/${user?.email}`).then(res => {
+      // console.log(res.data)
       const alredyBorrowed = res.data.find(oneBorred => oneBorred.email === user?.email && oneBorred.bookID == _id)
-      console.log(alredyBorrowed)
+      // console.log(alredyBorrowed)
       setBorrowed(alredyBorrowed)
     })
   }, [_id, user?.email])
-  console.log(borrowed)
+  // console.log(borrowed)
   const handelModal = () => {
     document.getElementById('my_modal_4').close()
-    navigate(`/Borrowed-Books/${user?.email}`)
+    // navigate(`/Borrowed-Books/${user?.email}`)
 
   }
   const handleBorrowBook = (e) => {
@@ -45,10 +46,11 @@ const BookDetails = ({ BookDetailsData }) => {
     const server = {
       displayName, returnDate: date, email, bookID: _id, quantity, borrowedDate: todayDate, isReturned: false
     }
-    axios.post(`http://localhost:3000/Borrow/${_id}`, server).then(res => {
-      console.log(res.data)
-      if (res.data.insertedId) {
+    axios.post(`https://assignment-11-server-zeta-orcin.vercel.app/Borrow/${_id}`, server).then(res => {
+      // console.log(res.data)
+      if (res.data.insertedId || res.data.acknowledged) {
         setcountQuantity(prev => prev - 1)
+        setalreadyborrowed(true)
         Swal.fire({
           position: "top-end",
           icon: "success",
@@ -58,9 +60,9 @@ const BookDetails = ({ BookDetailsData }) => {
         });
       }
     }).catch(error => {
-      console.log(error)
+      // console.log(error)
     })
-    console.log(server)
+    // console.log(server)
 
   }
   return (
@@ -122,11 +124,11 @@ const BookDetails = ({ BookDetailsData }) => {
                 {/* Borrow Book Button to open modal */}
                 <button
                   onClick={() => document.getElementById('my_modal_4').showModal()}
-                  className={`w-full flex items-center justify-center space-x-2 px-6 py-4 bg-gradient-to-r from-blue-600 to-teal-600 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-teal-700 transition-all duration-200 ${countQuantity === 0 || borrowed && 'cursor-not-allowed'}`}
-                  disabled={countQuantity === 0 || borrowed}
+                  className={`w-full flex items-center justify-center space-x-2 px-6 py-4 bg-gradient-to-r from-blue-600 to-teal-600 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-teal-700 transition-all duration-200 ${countQuantity === 0 || alreadyborrowed && 'cursor-not-allowed'} ${borrowed && 'cursor-not-allowed'}`}
+                  disabled={countQuantity === 0 || borrowed || alreadyborrowed}
                 >
                   <span className="w-5 h-5"><Download size={19} /></span>
-                  <span>{borrowed ? "Already borrowed" : <>
+                  <span>{borrowed || alreadyborrowed ? "Already borrowed" : <>
                     {countQuantity === 0 ? "Out of Stock" : "Borrow Book"}
                   </>}</span>
 
@@ -134,7 +136,7 @@ const BookDetails = ({ BookDetailsData }) => {
 
                 {/* Modal Dialog */}
                 <dialog id="my_modal_4" className="modal">
-                  <div className="modal-box w-xl">
+                  <div className="modal-box w-sm md:w-xl">
                     <form
                       onSubmit={handleBorrowBook} // ✅ Correctly reference the function (remove quotes)
                       className="bg-white rounded-2xl p-8 max-w-md w-full space-y-4"
@@ -192,6 +194,7 @@ const BookDetails = ({ BookDetailsData }) => {
                         <button
                           onClick={handelModal}
                           type="submit"
+                          required
                           className={`bg-gradient-to-r from-blue-600 to-teal-600 w-full text-white px-4 py-3 rounded-lg hover:from-blue-700 hover:to-teal-700 transition-all duration-200 ${borrowed && 'cursor-not-allowed'}`}
                           disabled={countQuantity === 0 || borrowed}
                         >

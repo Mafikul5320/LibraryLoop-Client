@@ -1,12 +1,59 @@
-# React + Vite
+# 📚 BookNest – Online Book Collection & Borrowing System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+BookNest is a full-featured MERN stack web application designed to help users explore books by categories, view book details, and borrow books. Admins can manage the book collection easily.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🌐 Live URL
 
-## Expanding the ESLint configuration
+[🔗 Visit BookNest Live](https://assignment-11-8f2e3.web.app)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🎯 Purpose
+
+To build a modern and user-friendly online platform where users can:
+- Explore books by category (Novel, Thriller, Fantasy, etc.)
+- Read summaries and details
+- Borrow and return books with date tracking
+
+---
+
+## ✨ Key Features
+
+- 🔍 Browse books by genre/category
+- 📖 View book details: title, author, summary, rating
+- 🛒 Borrow system with return date
+- 📂 Admin can add new books and categories
+- 🔐 User-based borrowing system via email
+- 🖼️ Beautiful book covers using Pexels API
+- 📅 Dates formatted for readability
+
+---
+
+## 📦 Technologies Used
+
+### 🚀 Frontend (React + Tailwind)
+- **React Router Dom** – for routing
+- **Axios** – for API requests
+- **Tailwind CSS** – for styling
+- **Lucide-react** – icons
+- **SweetAlert2** – for popup messages
+
+### 🔧 Backend (Node.js + Express)
+- **Express.js** – server routing
+- **MongoDB (Mongoose)** – database
+- **Cors** – handle cross-origin requests
+- **Dotenv** – load environment variables
+- **Body-Parser** – parse HTTP request bodies
+
+---
+
+## 📁 NPM Packages Used
+
+```bash
+# Backend
+npm install express mongoose cors dotenv body-parser
+
+# Frontend
+npm install axios react-router-dom sweetalert2 lucide-react

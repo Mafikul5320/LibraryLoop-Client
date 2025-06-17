@@ -1,12 +1,13 @@
 import React, { Suspense } from 'react';
 import AllBook from './AllBook';
 import useAllBookData from '../Api/useAllBookData';
+import Loading from '../components/Loading';
 
 const AllBookPage = () => {
     const { AllBookData } = useAllBookData()
     return (
         <div>
-            <Suspense >
+            <Suspense fallback={<Loading></Loading>}>
                 <AllBook AllBookData={AllBookData()}></AllBook>
             </Suspense>
         </div>

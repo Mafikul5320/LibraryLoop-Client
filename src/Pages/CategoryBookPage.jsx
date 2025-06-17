@@ -4,7 +4,7 @@ import CategoryBookCard from './CategoryBookCard';
 
 const CategoryBookPage = ({CategoryBookData}) => {
     const Bookdata = use(CategoryBookData);
-    console.log(Bookdata)
+    // console.log(Bookdata)
     return (
         <div>
             <title>Book Category|| LibraryLoop</title>

@@ -6,7 +6,7 @@ import ChooseLibraryLoop from '../Home/ChooseLibraryLoop';
 import Loading from '../components/Loading';
 
 const HomeLayout = () => {
-    const categoriesPromise = fetch('http://localhost:3000/categories').then(res => res.json())
+    const categoriesPromise = fetch('https://assignment-11-server-zeta-orcin.vercel.app/categories').then(res => res.json())
     return (
         <div>
             <Banner></Banner>

@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 
 const UpdateBook = ({BookDetailsData}) => {
     const data = use(BookDetailsData)
-    console.log(data)
+    // console.log(data)
     const { bookimage, bookname, quantity, rating, authorname, category, description, booksummary, _id } = data;
     const Handelsubmit = (e) => {
         e.preventDefault()
@@ -14,9 +14,9 @@ const UpdateBook = ({BookDetailsData}) => {
         const submitdata = Object.fromEntries(formData.entries())
         const quantity = submitdata.quantity
             submitdata.quantity = parseInt(quantity)
-        console.log(submitdata)
-        axios.put(`http://localhost:3000/books/${_id}`, submitdata).then(res => {
-            console.log(res.data)
+        // console.log(submitdata)
+        axios.put(`https://assignment-11-server-zeta-orcin.vercel.app/books/${_id}`, submitdata).then(res => {
+            // console.log(res.data)
             if (res.data.acknowledged) {
                 Swal.fire({
                     icon: "success",
@@ -25,8 +25,8 @@ const UpdateBook = ({BookDetailsData}) => {
                     timer: 1500
                 });
             }
-        }).catch(error => {
-            console.log(error)
+        }).catch(() => {
+            // console.log(error)
         })
     }
     return (

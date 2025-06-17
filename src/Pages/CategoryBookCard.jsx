@@ -1,7 +1,7 @@
 import { Eye, Package, Tag, User } from 'lucide-react';
 import React from 'react';
-import { Link } from 'react-router'; // ✅ Corrected import
-import { motion } from 'framer-motion'; // ✅ Added motion
+import { Link } from 'react-router'; 
+import { motion } from 'framer-motion'; 
 import StarRatings from 'react-star-ratings';
 
 const CategoryBookCard = ({ oneBook, index = 0 }) => {

@@ -24,14 +24,14 @@ export const Router = createBrowserRouter([
             },
             {
                 path: '/categories/:id',
-                // loader: ({ params }) => fetch(`http://localhost:3000/books/${params.id}`),
+                // loader: ({ params }) => fetch(`https://assignment-11-server-zeta-orcin.vercel.app/books/${params.id}`),
                 element: <PrivateRouter>
                     <CategoryBookDataLoad></CategoryBookDataLoad>
                 </PrivateRouter>
             },
             {
                 path: '/view-details/:id',
-                // loader: ({ params }) => fetch(`http://localhost:3000/books/${params.id}`),
+                // loader: ({ params }) => fetch(`https://assignment-11-server-zeta-orcin.vercel.app/books/${params.id}`),
                 element: <PrivateRouter>
                     <BookDetailsPage></BookDetailsPage>
                 </PrivateRouter>
@@ -44,14 +44,14 @@ export const Router = createBrowserRouter([
             },
             {
                 path: "/all-Book",
-                // loader: () => fetch(`http://localhost:3000/books`),
+                // loader: () => fetch(`https://assignment-11-server-zeta-orcin.vercel.app/books`),
                 element: <PrivateRouter>
                     <AllBookPage></AllBookPage>
                 </PrivateRouter>
             },
             {
                 path: "/Borrowed-Books/:email",
-                // loader: ({ params }) => fetch(`http://localhost:3000/Borrow/${params.email}`),
+                // loader: ({ params }) => fetch(`https://assignment-11-server-zeta-orcin.vercel.app/Borrow/${params.email}`),
                 element: <PrivateRouter>
                     <BorrowedBooks></BorrowedBooks>
                 </PrivateRouter>
@@ -66,7 +66,7 @@ export const Router = createBrowserRouter([
             },
             {
                 path: "/update-book/:id",
-                loader: ({ params }) => fetch(`http://localhost:3000/books/${params.id}`),
+                loader: ({ params }) => fetch(`https://assignment-11-server-zeta-orcin.vercel.app/books/${params.id}`),
                 element: <PrivateRouter>
                     <UpdateBookPage></UpdateBookPage>
                 </PrivateRouter>

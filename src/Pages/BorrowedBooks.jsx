@@ -4,6 +4,7 @@ import BorrowedBooksCard from './BorrowedBooksCard';
 import BookFilter from '../components/BookFilter';
 import { AuthContext } from '../Context/AuthContext';
 import useBorrowedBooksApi from '../Api/useBorrowedBooksApi';
+import Loading from '../components/Loading';
 
 const BorrowedBooks = () => {
   const { user } = use(AuthContext);
@@ -11,7 +12,7 @@ const BorrowedBooks = () => {
   const { BorrowedBooksData } = useBorrowedBooksApi()
 
 
-  // axios.get(`http://localhost:3000/Borrow/${user?.email}`, { email: user?.email }).then(res => {
+  // axios.get(`https://assignment-11-server-zeta-orcin.vercel.app/Borrow/${user?.email}`, { email: user?.email }).then(res => {
   //   // console.log(res.data)
   // }).catch(error => console.log(error))
   return (
@@ -63,7 +64,7 @@ const BorrowedBooks = () => {
         </div>
       </div>
       <div className='md:w-10/13 p-3 md:0 mx-auto'>
-        <Suspense>
+        <Suspense fallback={<Loading></Loading>}>
           <BorrowedBooksCard BorrowedBooksData={BorrowedBooksData(user?.email)}></BorrowedBooksCard>
         </Suspense>
       </div>

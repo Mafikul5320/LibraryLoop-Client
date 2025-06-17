@@ -11,7 +11,7 @@ const Navber = () => {
 
   const handelLogout = () => {
     SignOut().then(() => {
-      console.log("user SignOut");
+      // console.log("user SignOut");
       setUser(null);
     });
   };
@@ -21,12 +21,14 @@ const Navber = () => {
       <div className='w-10/13 mx-auto flex justify-between items-center'>
 
         {/* Left Site */}
-        <div className='flex items-center'>
-          <img className='w-10 h-10 object-cover rounded-lg' src={logo} alt="Logo" />
-          <h1 className='text-2xl pl-2 font-extrabold bg-gradient-to-r from-blue-600 to-teal-600 bg-clip-text text-transparent'>
-            LibraryLoop
-          </h1>
-        </div>
+        <Link to={'/'}>
+          <div className='flex items-center'>
+            <img className='w-10 h-10 object-cover rounded-lg' src={logo} alt="Logo" />
+            <h1 className='text-2xl pl-2 font-extrabold bg-gradient-to-r from-blue-600 to-teal-600 bg-clip-text text-transparent'>
+              LibraryLoop
+            </h1>
+          </div>
+        </Link>
 
         {/* Mobile Menu Button */}
         <div className='md:hidden'>

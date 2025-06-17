@@ -10,9 +10,9 @@ const AddBook = () => {
         const form = e.target;
         const formData = new FormData(form);
         const bookData = Object.fromEntries(formData.entries());
-        console.log(bookData)
-        axios.post('http://localhost:3000/books', bookData).then(res => {
-            console.log(res.data)
+        // console.log(bookData)
+        axios.post('https://assignment-11-server-zeta-orcin.vercel.app/books', bookData).then(res => {
+            // console.log(res.data)
 
             if (res.data.acknowledged) {
                 Swal.fire({
