@@ -3,12 +3,12 @@ import React from 'react';
 import { Link } from 'react-router';
 
 const BookCategoriesCard = ({ oneCategories }) => {
-    const { category, color, icon, description, quantity, label, _id } = oneCategories
-
+    const { category, color, icon, description, quantity, label, _id } = oneCategories;
+    console.log(color)
     return (
         <Link to={`/categories/${_id}`}>
             <div >
-                <div className={`${color} h-37 rounded-t-2xl relative`}>
+                <div className={`h-37 rounded-t-2xl relative ${color}`}>
                     <div className='absolute right-4 top-4 border-2 border-white/40 rounded-full w-8 h-8' />
                     <div className="absolute inset-0 bg-gradient-to-br from-transparent to-black/10" />
                     <div className='absolute left-4 top-17 border-1 rotate-45 border-white/30  w-6 h-6' />

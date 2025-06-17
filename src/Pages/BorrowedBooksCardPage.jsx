@@ -32,10 +32,10 @@ const BorrowedBooksCardPage = ({ oneborror, borrowData, setBorrowData }) => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="flex items-center my-3 justify-between bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300"
+            className="flex flex-col my-4 sm:flex-row sm:items-center justify-between bg-white p-4 sm:p-6 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 space-y-4 sm:space-y-0"
         >
             {/* Book Cover and Info */}
-            <div className="flex items-start gap-4">
+            <div className="flex items-start gap-4 flex-1">
                 <div className="relative">
                     <img
                         src={bookimage}
@@ -47,10 +47,10 @@ const BorrowedBooksCardPage = ({ oneborror, borrowData, setBorrowData }) => {
                     </div>
                 </div>
 
-                <div>
+                <div className="flex flex-col">
                     <h2 className="text-lg font-semibold text-gray-800">{bookname}</h2>
                     <p className="text-sm text-gray-500">👤 {authorname}</p>
-                    <div className="flex items-center gap-2 mt-1">
+                    <div className="flex flex-wrap items-center gap-2 mt-1">
                         <span className="bg-blue-100 text-blue-700 text-xs font-medium px-2 py-1 rounded-full">
                             {category}
                         </span>
@@ -59,14 +59,14 @@ const BorrowedBooksCardPage = ({ oneborror, borrowData, setBorrowData }) => {
                         </span>
                         <span className="text-sm text-gray-500">→</span>
                         <span className="text-sm text-gray-500">
-                            Return : <span className="text-gray-700 font-medium">{returnDate}</span>
+                            Return: <span className="text-gray-700 font-medium">{returnDate}</span>
                         </span>
                     </div>
                 </div>
             </div>
 
-            {/* Right Side Buttons */}
-            <div className="flex flex-col items-end space-y-2">
+            {/* Button */}
+            <div className="flex justify-end sm:justify-center">
                 <button
                     onClick={handelReturn}
                     className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition"

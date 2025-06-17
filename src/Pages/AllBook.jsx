@@ -65,7 +65,7 @@ const AllBook = ({ AllBookData }) => {
 
       {/* Grid View with motion */}
       {viewMode === "grid" ? (
-        <div className='grid grid-cols-4 gap-6 w-10/13 mx-auto'>
+        <div className='grid md:grid-cols-4 gap-6 w-10/13 mx-auto'>
           {
             displayBook.map((onebook, index) => (
               <motion.div
