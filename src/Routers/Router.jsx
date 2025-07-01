@@ -12,6 +12,7 @@ import BookDetailsPage from "../Pages/BookDetailsPage";
 import AllBookPage from "../Pages/AllBookPage";
 import CategoryBookDataLoad from "../Pages/CategoryBookDataLoad";
 import UpdateBookPage from "../Pages/UpdateBookPage";
+import About from "../Pages/About";
 
 export const Router = createBrowserRouter([
     {
@@ -63,6 +64,10 @@ export const Router = createBrowserRouter([
             {
                 path: "/register",
                 Component: Register
+            },
+            {
+                path: "/about",
+                Component: About
             },
             {
                 path: "/update-book/:id",

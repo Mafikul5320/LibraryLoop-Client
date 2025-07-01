@@ -4,6 +4,9 @@ import BookCategories from '../Home/BookCategories';
 import OurNumber from '../Home/OurNumber';
 import ChooseLibraryLoop from '../Home/ChooseLibraryLoop';
 import Loading from '../components/Loading';
+import ReadingExperience from '../Home/ReadingExperience';
+import Faq from '../Home/Faq';
+import Review from '../Home/Review';
 
 const HomeLayout = () => {
     const categoriesPromise = fetch('https://assignment-11-server-zeta-orcin.vercel.app/categories').then(res => res.json())
@@ -15,6 +18,9 @@ const HomeLayout = () => {
             </Suspense>
             <ChooseLibraryLoop></ChooseLibraryLoop>
             <OurNumber></OurNumber>
+            <ReadingExperience></ReadingExperience>
+            <Faq></Faq>
+            <Review></Review>
         </div>
     );
 };

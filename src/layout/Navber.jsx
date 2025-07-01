@@ -40,9 +40,14 @@ const Navber = () => {
         {/* Middle & Right Site (Desktop) */}
         <div className='hidden md:flex items-center space-x-3'>
           <NavLink to='/' className={({ isActive }) => `text-base font-semibold text-gray-500 ${isActive && "text-blue-600 border-b-2 pb-1"}`}>Home</NavLink>
-          <NavLink to='/all-Book' className={({ isActive }) => `text-base font-semibold text-gray-700 ${isActive && "text-blue-600 border-b-2 pb-1"}`}>All Books</NavLink>
-          <NavLink to='/add-book' className={({ isActive }) => `text-base font-semibold text-gray-500 ${isActive && "text-blue-600 border-b-3 pb-1"}`}>Add Book</NavLink>
+          {
+            user && <>
+              <NavLink to='/all-Book' className={({ isActive }) => `text-base font-semibold text-gray-700 ${isActive && "text-blue-600 border-b-2 pb-1"}`}>All Books</NavLink>
+              <NavLink to='/add-book' className={({ isActive }) => `text-base font-semibold text-gray-500 ${isActive && "text-blue-600 border-b-3 pb-1"}`}>Add Book</NavLink>
+            </>
+          }
           <NavLink to={`/Borrowed-Books/${user?.email}`} className={({ isActive }) => `text-base font-semibold text-gray-500 ${isActive && "text-blue-600 border-b-2 pb-1"}`}>Borrowed Books</NavLink>
+          <NavLink to={"/about"} className={({ isActive }) => `text-base font-semibold text-gray-500 ${isActive && "text-blue-600 border-b-2 pb-1"}`}>About Us</NavLink>
         </div>
 
         <div className='hidden md:flex items-center space-x-4'>
