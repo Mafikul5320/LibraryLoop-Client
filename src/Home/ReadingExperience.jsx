@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Star, Quote, ArrowRight, BookOpen, Heart, MessageCircle } from 'lucide-react';
+import { Link } from 'react-router';
 
 const ReadingExperience = () => {
 
@@ -52,7 +53,7 @@ const ReadingExperience = () => {
             <p className="text-xl text-gray-600 mb-8 leading-relaxed">
               Discover advanced features designed to make your reading journey more enjoyable, organized, and social.
             </p>
-            
+
             <div className="space-y-6">
               {features.map((feature, index) => {
                 const Icon = feature.icon;
@@ -89,14 +90,16 @@ const ReadingExperience = () => {
               transition={{ duration: 0.6, delay: 0.4 }}
               className="mt-8"
             >
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-teal-600 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-teal-700 transition-all duration-300 shadow-lg"
-              >
-                Start Your Journey
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </motion.button>
+              <Link to={"/all-Book"}>
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="cursor-pointer inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-teal-600 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-teal-700 transition-all duration-300 shadow-lg"
+                >
+                  Start Your Journey
+                  <ArrowRight className="w-5 h-5 ml-2" />
+                </motion.button>
+              </Link>
             </motion.div>
           </motion.div>
 
@@ -113,7 +116,7 @@ const ReadingExperience = () => {
                 alt="Reading Experience"
                 className="rounded-3xl shadow-2xl w-full"
               />
-              
+
               {/* Floating Elements */}
               <motion.div
                 animate={{ y: [-10, 10, -10] }}
@@ -125,7 +128,7 @@ const ReadingExperience = () => {
                   <span className="font-semibold text-gray-900">124 Books Read</span>
                 </div>
               </motion.div>
-              
+
               <motion.div
                 animate={{ y: [10, -10, 10] }}
                 transition={{ duration: 3, repeat: Infinity }}

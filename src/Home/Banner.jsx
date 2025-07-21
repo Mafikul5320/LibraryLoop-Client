@@ -3,6 +3,7 @@ import { Autoplay, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css'
 import 'swiper/css/pagination';
+import { Link } from 'react-router';
 
 const Banner = () => {
     const slides = [
@@ -58,12 +59,16 @@ const Banner = () => {
                                         <h2 className="text-lg md:text-2xl text-blue-200 font-medium">{oneslide.subtitle}</h2>
                                         <p className="text-base md:text-lg text-gray-200">{oneslide.description}</p>
                                         <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4">
-                                            <button className="px-6 py-3 bg-gradient-to-r from-blue-600 to-teal-600 rounded-lg text-white font-semibold shadow-2xl">
-                                                {oneslide.cta}
-                                            </button>
-                                            <button className="px-6 py-3 border-2 border-white text-white rounded-lg hover:bg-white hover:text-black transition">
-                                                Learn More
-                                            </button>
+                                            <Link to={"/all-Book"}>
+                                                <button className="cursor-pointer px-6 py-3 bg-gradient-to-r from-blue-600 to-teal-600 rounded-lg text-white font-semibold shadow-2xl">
+                                                    {oneslide.cta}
+                                                </button>
+                                            </Link>
+                                            <Link to={"/about"}>
+                                                <button className="cursor-pointer px-6 py-3 border-2 border-white text-white rounded-lg hover:bg-white hover:text-black transition">
+                                                    Learn More
+                                                </button>
+                                            </Link>
                                         </div>
                                     </div>
 

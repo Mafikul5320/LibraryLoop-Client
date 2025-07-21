@@ -46,7 +46,7 @@ const BookCategories = ({ categoriesPromise }) => {
                 <div className='flex justify-center mt-11'>
                     <button
                         onClick={() => setShowAll(!showAll)}
-                        className="px-8 py-4 bg-gradient-to-r from-blue-600 to-teal-600 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-teal-700 transition-all duration-300 shadow-lg "
+                        className="cursor-pointer px-8 py-4 bg-gradient-to-r from-blue-600 to-teal-600 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-teal-700 transition-all duration-300 shadow-lg "
                     >
                         {showAll ? 'View Less Categories' : 'View All Categories'}
                     </button>
