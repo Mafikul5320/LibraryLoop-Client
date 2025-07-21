@@ -6,7 +6,7 @@ const About = () => {
   return (
     <div>
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-gray-50 to-green-50 text-white py-20">
+      <section className="bg-gradient-to-r from-blue-50 to-teal-50 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -52,7 +52,7 @@ const About = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="text-center"
               >
-                <div className="bg-[#114a44] text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="bg-gradient-to-r from-blue-600 to-teal-600 text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                   {stat.icon}
                 </div>
                 <div className="text-3xl font-bold text-gray-800 mb-2">{stat.value}</div>

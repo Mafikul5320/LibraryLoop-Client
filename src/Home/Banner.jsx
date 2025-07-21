@@ -12,7 +12,7 @@ const Banner = () => {
             title: "Welcome to LibraryLoop",
             subtitle: "Your Digital Gateway to Knowledge",
             description: "Discover thousands of books, manage your reading journey, and connect with a community of book lovers in our comprehensive library management system.",
-            image: "https://images.pexels.com/photos/1370296/pexels-photo-1370296.jpeg",
+            image: "https://i.ibb.co/nqWpyMBy/luxury-reading-material-illuminates-old-fashioned-elegance-indoors-generated-by-ai-1.jpg",
             cta: "Start Reading",
             stats: { books: "10,000+", users: "5,000+", categories: "25+" }
         },
@@ -21,7 +21,7 @@ const Banner = () => {
             title: "Seamless Book Management",
             subtitle: "Borrow, Track, and Return with Ease",
             description: "Our intuitive platform makes it simple to browse our extensive collection, borrow your favorite books, and keep track of your reading progress.",
-            image: "https://images.pexels.com/photos/2908984/pexels-photo-2908984.jpeg",
+            image: "https://i.ibb.co/DPCC4zhD/abundant-collection-antique-books-wooden-shelves-generated-by-ai-1.jpg",
             cta: "Browse Books",
             stats: { borrowed: "15,000+", returns: "98%", satisfaction: "4.9/5" }
         },
@@ -30,7 +30,7 @@ const Banner = () => {
             title: "Join Our Reading Community",
             subtitle: "Connect, Share, and Grow Together",
             description: "Be part of a vibrant community where readers share recommendations, discuss books, and embark on literary adventures together.",
-            image: "https://images.pexels.com/photos/1319854/pexels-photo-1319854.jpeg",
+            image: "https://i.ibb.co/VWqg9kdM/young-librarian-organising-books-1.jpg",
             cta: "Join Community",
             stats: { reviews: "25,000+", discussions: "1,000+", events: "50+" }
         }
