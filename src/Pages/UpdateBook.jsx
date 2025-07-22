@@ -15,7 +15,7 @@ const UpdateBook = ({BookDetailsData}) => {
         const quantity = submitdata.quantity
             submitdata.quantity = parseInt(quantity)
         // console.log(submitdata)
-        axios.put(`http://localhost:3000/books/${_id}`, submitdata).then(res => {
+        axios.put(`https://assignment-11-server-zeta-orcin.vercel.app/books/${_id}`, submitdata).then(res => {
             // console.log(res.data)
             if (res.data.acknowledged) {
                 Swal.fire({

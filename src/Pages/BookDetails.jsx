@@ -18,7 +18,7 @@ const BookDetails = ({ BookDetailsData }) => {
   const { bookimage, bookname, quantity, rating, authorname, category, description, booksummary, _id } = data;
   const [countQuantity, setcountQuantity] = useState(quantity)
   useEffect(() => {
-    axiosSecure.get(`http://localhost:3000/Borrow/${user?.email}`).then(res => {
+    axiosSecure.get(`https://assignment-11-server-zeta-orcin.vercel.app/Borrow/${user?.email}`).then(res => {
       // console.log(res.data)
       const alredyBorrowed = res.data.find(oneBorred => oneBorred.email === user?.email && oneBorred.bookID == _id)
       // console.log(alredyBorrowed)
@@ -46,7 +46,7 @@ const BookDetails = ({ BookDetailsData }) => {
     const server = {
       displayName, returnDate: date, email, bookID: _id, quantity, borrowedDate: todayDate, isReturned: false
     }
-    axios.post(`http://localhost:3000/Borrow/${_id}`, server).then(res => {
+    axios.post(`https://assignment-11-server-zeta-orcin.vercel.app/Borrow/${_id}`, server).then(res => {
       // console.log(res.data)
       if (res.data.insertedId || res.data.acknowledged) {
         setcountQuantity(prev => prev - 1)

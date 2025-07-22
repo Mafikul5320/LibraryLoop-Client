@@ -9,11 +9,11 @@ const BorrowedBooksCardPage = ({ oneborror, borrowData, setBorrowData }) => {
     const server = { quantity };
 
     const handelReturn = () => {
-        axios.put(`http://localhost:3000/books/${bookID}`, server).then(res => {
+        axios.put(`https://assignment-11-server-zeta-orcin.vercel.app/books/${bookID}`, server).then(res => {
             // console.log(res.data);
         });
 
-        axios.delete(`http://localhost:3000/Borrows/${_id}`).then(res => {
+        axios.delete(`https://assignment-11-server-zeta-orcin.vercel.app/Borrows/${_id}`).then(res => {
             if (res.data.deletedCount) {
                 const remain = borrowData.filter(one => one?._id !== _id);
                 Swal.fire({

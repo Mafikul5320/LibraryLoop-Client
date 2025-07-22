@@ -13,7 +13,7 @@ const BookCategories = ({ categoriesPromise }) => {
         if (showAll) {
             setCategoriesDispaly(Categories);
         } else {
-            setCategoriesDispaly(Categories.slice(0, 4));
+            setCategoriesDispaly(Categories?.slice(0, 4));
         }
     }, [Categories, showAll]);
 
@@ -29,7 +29,7 @@ const BookCategories = ({ categoriesPromise }) => {
 
 
                 <div className='grid md:grid-cols-4 gap-7 mt-9'>
-                    {Categoriesdisplay.map((oneCategories, index) => (
+                    {Categoriesdisplay?.map((oneCategories, index) => (
                         <motion.div
                             key={oneCategories._id}
                             initial={{ opacity: 0, y: 20 }}
